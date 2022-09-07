@@ -1,6 +1,5 @@
 package pl.sda.JokeApp123.joke;
 
-import java.util.List;
 import lombok.AllArgsConstructor;
 import org.springframework.lang.Nullable;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -13,13 +12,11 @@ import org.springframework.web.bind.annotation.RestController;
 @AllArgsConstructor
 public class JokeController {
 
-
     private JokeServiceSelector jokeServiceSelector;
 
     @GetMapping
-    public Joke getJoke(@Nullable @RequestParam String category) {
-        return jokeServiceSelector.getJoke(category)
-            .orElse(new Joke("default Joke"));
+    public Joke getJoke(@Nullable @RequestParam String category) throws JokeException {
+        return jokeServiceSelector.getRandomJokeByCategory(category);
     }
 
 
