@@ -19,23 +19,27 @@ public class ExternalApiJoke implements JokeService {
     private HttpClient httpClient;
 
     @Override
-    public Optional<Joke> getJoke(String category) {
+    public Optional<Joke> getJokeByCategory(String category) {
 
-        if (category != null && category.equals("chuck-norris")) {
-            try {
-                HttpRequest request = HttpRequest.newBuilder()
-                    .uri(new URI("https://api.chucknorris.io/jokes/random"))
-                    .GET()
-                    .build();
+         Optional.ofNullable(category).map(a->{
+            if (a.equals("chuck-norris")) {
+                try {
+                    HttpRequest request = HttpRequest.newBuilder()
+                        .uri(new URI("https://api.chucknorris.io/jokes/random"))
+                        .GET()
+                        .build();
 
-                HttpResponse<String> response = httpClient.send(request, HttpResponse.BodyHandlers.ofString());
+                    HttpResponse<String> response = httpClient.send(request, HttpResponse.BodyHandlers.ofString());
 
-                return Optional.ofNullable(objectMapper.readValue(response.body(), Joke.class));
+                    return Optional.ofNullable(objectMapper.readValue(response.body(), Joke.class));
 
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+                return Optional.empty();
         }
+            return Optional.empty();
+        }).orElseThrow(() -> new RuntimeException("asdf"));
         return Optional.empty();
     }
 

@@ -5,6 +5,6 @@ import java.util.Optional;
 import pl.sda.JokeApp123.joke.Joke;
 
 public interface JokeService {
-    Optional<Joke> getJoke(String category);
+    Optional<Joke> getJokeByCategory(String category);
     List<String> getAvailableCategories();
 }
