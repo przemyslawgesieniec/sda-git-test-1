@@ -15,7 +15,7 @@ public class JokeServiceSelector {
         if (category != null) {
             return jokeServiceList.stream()
                 .filter(jokeService -> jokeService.getAvailableCategories().contains(category))
-                .map(jokeService -> jokeService.getJokeByCategory(category))
+                .map(jokeService -> jokeService.getJoke(category))
                 .findFirst()
                 .orElseThrow(() -> new JokeException("Bad Joke entity"))
                 .orElseThrow(() -> new JokeException("No joke available for this category"));

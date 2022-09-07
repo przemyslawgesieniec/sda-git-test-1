@@ -19,7 +19,7 @@ public class ExternalApiJoke implements JokeService {
     private HttpClient httpClient;
 
     @Override
-    public Optional<Joke> getJokeByCategory(String category) {
+    public Optional<Joke> getJoke(String category) {
 
          Optional.ofNullable(category).map(a->{
             if (a.equals("chuck-norris")) {
