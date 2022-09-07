@@ -15,7 +15,7 @@ public class JokeFromDbService implements JokeService {
     private JokeRepository jokeRepository;
 
     @Override
-    public Optional<Joke> getJoke(String category) {
+    public Optional<Joke> getJokeByCategory(String category) {
         return jokeRepository
             .findByCategory(category)
             .map(jokeEntity -> new Joke(jokeEntity.getJokeValue(), jokeEntity.getCategory()));
